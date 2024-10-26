@@ -28,11 +28,11 @@ const TaskForm = ({ existingTask, onClose }) => {
   const onSubmit = data => {
     const newData = {
       ...data,
-      state: isEdit ? existingTask.state : 'todo', // Retain existing state if editing
-      id: isEdit ? existingTask.id : Date.now(), // Use existing ID when editing
+      state: isEdit ? existingTask.state : 'todo', 
+      id: isEdit ? existingTask.id : Date.now(), 
     };
     if (isEdit) {
-      dispatch(updateTask(newData)); // Update with the new data
+      dispatch(updateTask(newData)); 
     } else {
       dispatch(addTask(newData));
     }
