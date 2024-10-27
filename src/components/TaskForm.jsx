@@ -28,11 +28,11 @@ const TaskForm = ({ existingTask, onClose }) => {
   const onSubmit = data => {
     const newData = {
       ...data,
-      state: isEdit ? existingTask.state : 'todo', 
-      id: isEdit ? existingTask.id : Date.now(), 
+      state: isEdit ? existingTask.state : 'todo',
+      id: isEdit ? existingTask.id : Date.now(),
     };
     if (isEdit) {
-      dispatch(updateTask(newData)); 
+      dispatch(updateTask(newData));
     } else {
       dispatch(addTask(newData));
     }
@@ -41,26 +41,37 @@ const TaskForm = ({ existingTask, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" {...register('title')} placeholder="Title" />
-      {errors.title && <p>{errors.title.message}</p>}
-      
-      <input type="text" {...register('description')} placeholder="Description" />
-      {errors.description && <p>{errors.description.message}</p>}
-      
-      <select {...register('priority')}>
-        <option value="">Select Priority</option>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-      {errors.priority && <p>{errors.priority.message}</p>}
+      <div className="col-md-12">
+        <div className="row d-flex justify-content-around">
+          <div className="col-6">
 
-      <input type="url" {...register('image')} placeholder="Image URL" />
-      {errors.image && <p>{errors.image.message}</p>}
-      
-      <button type="submit">{isEdit ? 'Update Task' : 'Add Task'}</button>
-      <button type="button" onClick={onClose}>Cancel</button>
-    </form>
+            <input class="form-control w-100 mt-5" type="text" {...register('title')} placeholder="Title" />
+            {errors.title && <p>{errors.title.message}</p>}
+
+            <input class="form-control w-100 mt-5" type="text" {...register('description')} placeholder="Description" />
+            {errors.description && <p>{errors.description.message}</p>}
+
+          </div>
+
+          <div className="col-6">
+            <select class="form-select w-100 mt-5" {...register('priority')}>
+              <option value="">Select Priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+            {errors.priority && <p>{errors.priority.message}</p>}
+
+            <input class="form-control w-100 mt-5" type="url" {...register('image')} placeholder="Image URL" />
+            {errors.image && <p>{errors.image.message}</p>}
+          </div>
+        </div>
+      </div >
+      <div class="d-flex justify-content-around">
+        <button type="submit" class="btn btn-outline-success w-25 mt-4">{isEdit ? 'Update Task' : 'Add Task'}</button>
+        <button type="button" class="btn btn-outline-danger w-25 mt-4" onClick={onClose}>Cancel</button>
+      </div>
+    </form >
   );
 };
 
